@@ -1,7 +1,7 @@
-Preference
+Sales
 ==========
 
-This is the preference microservice, part of the Istio Tutorial demo. Even though this microservice is meant to be executed within a Container on a Pod on Kubernetes/OpenShift, it can still be executed on bare metal.
+This is the sales microservice, part of the Istio Tutorial demo. Even though this microservice is meant to be executed within a Container on a Pod on Kubernetes/OpenShift, it can still be executed on bare metal.
 
 This is a regular Spring Boot application, with OpenTracing and Jaeger dependencies to provide distributed tracing capabilities.
 
@@ -11,7 +11,7 @@ Running on the local machine
 To run this service for development purposes on your own machine, execute:
 
 ```bash
-JAEGER_SERVICE_NAME=preference mvn \
+JAEGER_SERVICE_NAME=sales mvn \
   spring-boot:run \
   -Drun.arguments="--spring.config.location=src/main/resources/application-local.properties"
 ```
@@ -43,7 +43,7 @@ To test, call http://localhost:8180/
 
 ```
 $ curl http://localhost:8180/
-preference => recommendation v1 from 'caju': 3
+sales => recommendation v1 from 'caju': 3
 ```
 
 And should generate a trace like this:
@@ -57,15 +57,15 @@ The following commands will build a Docker image containing the application, cre
 
 ```bash
 mvn clean package
-docker build -t example/preference .
-docker images | grep preference
+docker build -t sales .
+docker images | grep sales
 oc apply -f ../../kubernetes/Deployment.yml
 oc apply -f ../../kubernetes/Service.yml
-oc expose service preference
+oc expose service sales
 ```
 
 The last command will expose the service to the outside world, allowing you to make an HTTP call directly from your host machine:
 
 ```
-curl http://preference-tutorial.127.0.0.1.nip.io/
+curl http://sales-tutorial.127.0.0.1.nip.io/
 ```

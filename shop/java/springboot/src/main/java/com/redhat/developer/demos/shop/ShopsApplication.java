@@ -1,4 +1,4 @@
-package com.redhat.developer.demos.preference;
+package com.redhat.developer.demos.shop;
 
 import io.jaegertracing.Configuration;
 import org.springframework.boot.SpringApplication;
@@ -10,10 +10,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 
 @SpringBootApplication
-public class PreferencesApplication extends WebMvcConfigurerAdapter {
+public class ShopsApplication extends WebMvcConfigurerAdapter {
 
 	public static void main(String[] args) {
-		SpringApplication.run(PreferencesApplication.class, args);
+		SpringApplication.run(ShopsApplication.class, args);
 	}
 
 	@Bean

@@ -1,4 +1,4 @@
-package com.redhat.developer.demos.preference;
+package com.redhat.developer.demos.sales;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +12,7 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
-public class PreferencesController {
+public class SalesController {
 
     private static final String RESPONSE_STRING_FORMAT = "sales => %s\n";
 
@@ -20,26 +20,26 @@ public class PreferencesController {
 
     private final RestTemplate restTemplate;
 
-    @Value("${shop.api.url:http://shop:8080}")
+    @Value("${shops.api.url:http://shop:8080}")
     private String remoteURL;
 
-    public PreferencesController(RestTemplate restTemplate) {
+    public SalesController(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
     @RequestMapping("/")
-    public ResponseEntity<?> getPreferences() {
+    public ResponseEntity<?> getSales() {
         try {
             ResponseEntity<String> responseEntity = restTemplate.getForEntity(remoteURL, String.class);
             String response = responseEntity.getBody();
             return ResponseEntity.ok(String.format(RESPONSE_STRING_FORMAT, response.trim()));
         } catch (HttpStatusCodeException ex) {
-            logger.warn("Exception trying to get the response from recommendation service.", ex);
+            logger.warn("Exception trying to get the response from shop service.", ex);
             return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE)
                     .body(String.format(RESPONSE_STRING_FORMAT,
                             String.format("%d %s", ex.getRawStatusCode(), createHttpErrorResponseString(ex))));
         } catch (RestClientException ex) {
-            logger.warn("Exception trying to get the response from recommendation service.", ex);
+            logger.warn("Exception trying to get the response from shop service.", ex);
             return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE)
                     .body(String.format(RESPONSE_STRING_FORMAT, ex.getMessage()));
         }

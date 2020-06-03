@@ -1,4 +1,4 @@
-package com.redhat.developer.demos.preference;
+package com.redhat.developer.demos.sales;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class PreferencesApplicationTests {
+public class SalesApplicationTests {
 
 	@Test
 	public void contextLoads() {

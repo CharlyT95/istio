@@ -1,4 +1,4 @@
-package com.redhat.developer.demos.preference;
+package com.redhat.developer.demos.shop;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +12,7 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
-public class PreferencesController {
+public class ShopsController {
 
     private static final String RESPONSE_STRING_FORMAT = "shop => %s\n";
 
@@ -20,15 +20,15 @@ public class PreferencesController {
 
     private final RestTemplate restTemplate;
 
-    @Value("${recommendation.api.url:http://recommendation:8080}")
+    @Value("${recommendations.api.url:http://recommendations:8080}")
     private String remoteURL;
 
-    public PreferencesController(RestTemplate restTemplate) {
+    public ShopsController(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
     @RequestMapping("/")
-    public ResponseEntity<?> getPreferences() {
+    public ResponseEntity<?> getShops() {
         try {
             ResponseEntity<String> responseEntity = restTemplate.getForEntity(remoteURL, String.class);
             String response = responseEntity.getBody();
